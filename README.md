@@ -24,6 +24,19 @@ The repository has the original Spanish version and an English translation with 
 
 In `ENG/` only the text was translated: markdown, comments, printed messages and plot labels. Variable and function names, and the saved outputs of the notebooks, are the original ones, so the figures stored inside the notebooks keep their Spanish labels. The data files (`.xlsx`, `foo.npz`) are the same in both folders.
 
+## 2026 revision
+
+`Revision_2026/` holds the code that produces the figures of the corrected
+version of the article, and replaces the notebooks above for reproducibility.
+The notebooks stay as the record of what was done first.
+
+It reimplements the differential and linear cryptanalysis and the chaotic
+attack, with frozen tests written against published values before the
+implementation existed, and it ships the checkpoints of both parameter sweeps,
+so every number in the article can be traced back to the run that produced it.
+Its README, in Spanish, lists what each correction changes and why.
+
 ## Versión en español
 
 La versión original en español, con su README, está en `Original_Spanish_version/`.
+El código de la revisión de 2026 está en `Revision_2026/`, con su propio README.
