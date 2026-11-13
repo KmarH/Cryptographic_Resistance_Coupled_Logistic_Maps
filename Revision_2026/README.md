@@ -10,6 +10,7 @@ Dependencias: `numpy`, `scipy`, y `pytest` para las pruebas.
 python -m pytest -q                                    # 32 pruebas
 python merge_verif.py resultados/evolucion_diferencial # veredicto del GLM
 python merge_cbpso.py resultados/cbpso_alto            # el mismo intento con CBPSO
+python etapa_dos.py                                    # las condiciones iniciales
 ```
 
 Los dos últimos no vuelven a correr nada: leen los checkpoints incluidos y
@@ -28,6 +29,7 @@ reconstruyen las cifras del artículo a partir de ellos.
 | `run_figures_map.py` | Figuras del atractor y de la señal del transmisor. |
 | `verify_glm_break.py` | Ataque de presupuesto alto con evolución diferencial sobre el mapa generalizado, en dos cajas de búsqueda. |
 | `cbpso_alto.py` | El mismo intento usando sólo CBPSO, con el enjambre y la duración ampliados. |
+| `etapa_dos.py` | Segunda etapa del ataque: con los parámetros ya fijados, recupera las condiciones iniciales. |
 | `merge_verif.py`, `merge_cbpso.py` | Fusionan los repartos de cada barrido y dictan el veredicto. |
 | `test_*.py` | Pruebas congeladas, escritas antes de la implementación. |
 
@@ -93,9 +95,9 @@ se cuantiza en la mediana de la órbita.
 
 ## Qué se midió
 
-Mapa simple acoplado: CBPSO recupera la llave en los 100 ciclos, y la evolución
-diferencial de control en la totalidad de las corridas de los dos escenarios, de
-manera que la brecha no depende de conocer las condiciones iniciales.
+Mapa simple acoplado: CBPSO recupera los parámetros en los 100 ciclos y la
+evolución diferencial de control en la totalidad de las corridas; la segunda
+etapa completa la llave con sus condiciones iniciales.
 
 Mapa generalizado acoplado, con el presupuesto original: ni CBPSO ni el control
 cruzan el umbral de 10⁻⁶, y se detienen en el mismo orden de magnitud.
@@ -108,12 +110,40 @@ Mapa generalizado acoplado, con presupuesto alto:
 | Evolución diferencial + refinamiento local, dominio completo | 1,80×10⁶ | 7,2 | 1 de 12 | 1,74×10⁻²⁵ |
 | CBPSO ampliado + el mismo refinamiento, dominio completo | 1,80×10⁸ | 717 | 0 de 12 | 1,54×10⁻⁴ |
 
-La llave del mapa generalizado se recupera, y no sólo dentro de las cotas
-estrechas del código original sino también en el espacio de llaves declarado.
-CBPSO no lo consigue ni con cien veces el presupuesto del ataque que sí lo
-logra: mejora 27 veces respecto de los 100 ciclos originales y se detiene tres
-órdenes de magnitud por encima del umbral. Lo que rompe al mapa generalizado es
-el método de búsqueda, no el tamaño del presupuesto.
+Los parámetros del mapa generalizado se recuperan, y no sólo dentro de las
+cotas estrechas del código original sino también en el espacio de llaves
+declarado. CBPSO no lo consigue ni con cien veces el presupuesto del ataque que
+sí lo logra: mejora 27 veces respecto de los 100 ciclos originales y se detiene
+tres órdenes de magnitud por encima del umbral. Lo que rompe al mapa
+generalizado es el método de búsqueda, no el tamaño del presupuesto.
+
+## La segunda etapa
+
+El ataque tiene dos etapas, como el cuaderno original: primero los parámetros,
+con la función objetivo evaluada a partir del segundo punto, y después las
+condiciones iniciales, con los parámetros ya fijados y comparando órbitas que
+sí incluyen el punto inicial. `etapa_dos.py` reproduce la segunda.
+
+| caso | cotas | mejor ECM | error en x₀, y₀ | éxitos |
+|---|---|---|---|---|
+| LM, parámetros exactos | [0,001; 0,1] | 0 (exacto) | 0 %, 0 % | 10 de 10 |
+| LM, parámetros exactos | [0, 1] | 0 (exacto) | 0 %, 0 % | 10 de 10 |
+| GLM, parámetros exactos | [0,001; 0,1] | 8,19×10⁻⁵ | 27,6 %, 15,5 % | 0 de 10 |
+| GLM, parámetros exactos | [0, 1] | 6,40×10⁻⁶ | 7,27 %, 4,85 % | 0 de 10 |
+
+El mapa simple entrega la llave completa. El generalizado no entrega sus
+condiciones iniciales ni partiendo de los parámetros exactos, y la causa es
+medible: el objetivo vale cero exacto en el punto verdadero en los dos mapas,
+pero una desviación de 10⁻⁸ en x₀ lleva el error a 4,67×10⁻¹¹ en el simple y a
+5,23×10⁻² en el generalizado. La cuenca del generalizado mide menos de 10⁻⁹ de
+ancho y ningún muestreo del dominio la localiza, mientras que en el simple el
+error crece de forma cuadrática y la cuenca resulta lo bastante ancha.
+
+Esto no restituye la seguridad del esquema: la primera etapa opera desde un
+punto interceptado y no necesita las condiciones iniciales, de modo que quien
+recupere los parámetros puede propagar la órbita desde cualquier punto que
+intercepte. Lo que queda fuera de su alcance es el valor con que se generó la
+secuencia, no la capacidad de reproducirla.
 
 ## Sobre los dos barridos
 
