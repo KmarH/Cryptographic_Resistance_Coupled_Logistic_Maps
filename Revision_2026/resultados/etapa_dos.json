@@ -1,0 +1,140 @@
+{
+ "LM, parametros exactos": {
+  "del cuaderno original | CBPSO": {
+   "mse": 0.0,
+   "x0": 0.03,
+   "y0": 0.01,
+   "error_pct": [
+    0.0,
+    0.0
+   ],
+   "exitos": 10,
+   "corridas": 10
+  },
+  "del cuaderno original | evolucion diferencial": {
+   "mse": 9.141145616250458e-34,
+   "x0": 0.03000000000000002,
+   "y0": 0.009999999999999981,
+   "error_pct": [
+    6.938893903907228e-14,
+    1.9081958235744878e-13
+   ],
+   "exitos": 10,
+   "corridas": 10
+  },
+  "dominio completo | CBPSO": {
+   "mse": 0.0,
+   "x0": 0.03,
+   "y0": 0.01,
+   "error_pct": [
+    0.0,
+    0.0
+   ],
+   "exitos": 10,
+   "corridas": 10
+  },
+  "dominio completo | evolucion diferencial": {
+   "mse": 1.0696452109861096e-29,
+   "x0": 0.030000000000000082,
+   "y0": 0.009999999999999953,
+   "error_pct": [
+    2.7755575615628914e-13,
+    4.683753385137379e-13
+   ],
+   "exitos": 10,
+   "corridas": 10
+  }
+ },
+ "GLM, parametros de la corrida que rompio": {
+  "del cuaderno original | CBPSO": {
+   "mse": 0.0001309300777565239,
+   "x0": 0.020654040389538154,
+   "y0": 0.013092095312009982,
+   "error_pct": [
+    31.153198701539484,
+    30.920953120099814
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "del cuaderno original | evolucion diferencial": {
+   "mse": 8.186405062555483e-05,
+   "x0": 0.03828652394031872,
+   "y0": 0.008451007720418575,
+   "error_pct": [
+    27.62174646772908,
+    15.489922795814248
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "dominio completo | CBPSO": {
+   "mse": 0.0002142710147824761,
+   "x0": 0.04373111919460517,
+   "y0": 0.007553783842146271,
+   "error_pct": [
+    45.77039731535058,
+    24.462161578537295
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "dominio completo | evolucion diferencial": {
+   "mse": 6.399575927804322e-06,
+   "x0": 0.027820271083206005,
+   "y0": 0.01048501336494817,
+   "error_pct": [
+    7.2657630559799795,
+    4.850133649481701
+   ],
+   "exitos": 0,
+   "corridas": 10
+  }
+ },
+ "GLM, mejor ciclo de CBPSO": {
+  "del cuaderno original | CBPSO": {
+   "mse": 0.003977540974678332,
+   "x0": 0.024115133032344548,
+   "y0": 0.010662934965583775,
+   "error_pct": [
+    19.61622322551817,
+    6.629349655837749
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "del cuaderno original | evolucion diferencial": {
+   "mse": 0.003543102965760532,
+   "x0": 0.02821702444902271,
+   "y0": 0.005596303968468767,
+   "error_pct": [
+    5.9432518365909575,
+    44.03696031531233
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "dominio completo | CBPSO": {
+   "mse": 0.0042793038366649265,
+   "x0": 0.03192407846155658,
+   "y0": 0.009807790801814494,
+   "error_pct": [
+    6.413594871855268,
+    1.9220919818550668
+   ],
+   "exitos": 0,
+   "corridas": 10
+  },
+  "dominio completo | evolucion diferencial": {
+   "mse": 0.0037161913178739305,
+   "x0": 0.024684195342196846,
+   "y0": 0.006753816067913865,
+   "error_pct": [
+    17.719348859343842,
+    32.46183932086135
+   ],
+   "exitos": 0,
+   "corridas": 10
+  }
+ }
+}
